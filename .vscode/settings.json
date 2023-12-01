@@ -1,0 +1,21 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.py$",
+                "cmd": "explicit-import ${file}", // should be implemented by jola
+                "isAsync": false,
+            },
+            {
+                "match": "\\.py$",
+                "cmd": "VERSION_FLAG=$(python3 -c \"import sys; v=sys.version_info; print(f'--py{v.major}{v.minor}-plus' if v.major == 3 and v.minor >= 6 else '--py3-plus')\"); ${workspaceFolder}/.venv/bin/pyupgrade $VERSION_FLAG ${file}",
+                "isAsync": false,
+            },
+            {
+                "match": "\\.py$",
+                "cmd": "if [ -f ${workspaceFolder}/.venv/bin/ruff ]; then CMD=${workspaceFolder}/.venv/bin/ruff; else CMD=ruff; fi; $CMD --unsafe-fixes --fix ${file}", // ruff, but use venv if exists
+                "isAsync": false,
+            }
+        ]
+    },
+}
