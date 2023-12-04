@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/code-yeongyu/jola/master/docs/images/logo.png" alt="JOLA">
 </p>
 <p align="center">
-    <em>Judicious Observant Linting Assistant</em>
+    <em>Judicious Observant Linting Assistant 🚀</em>
 </p>
 
 # JOLA - Judicious Observant Linting Assistant 🚀
@@ -69,7 +69,7 @@ class Article(models.Model):
     user = models.ForeignKey('users.User', ...)
 ```
 
-In such cases, JOLA recommends a workaround to avoid circular imports and maintain clarity:
+In such cases, I recommend you a workaround to avoid circular imports and maintain clarity, by manually:
 
 ```python
 from typing import TYPE_CHECKING, Any
@@ -80,7 +80,7 @@ else:
     User = Any
 
 class Article(models.Model):
-    user = models.ForeignKey('users.User', ...)
+    user: models.ForeignKey[User] = models.ForeignKey('users.User', ...)
 ```
 
 This approach ensures type hinting for language servers without runtime import issues.
